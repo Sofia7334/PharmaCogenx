@@ -1,2 +1,26 @@
 # PharmaCogenx
-PharmaCogenx is a Python-based, rules-driven pharmacogenomics simulator that will allow students to upload a mock genetic report and receive an interactive simulation of how identified genetic variations may influence medication response, including effectiveness and potential side effects.
+
+# PharmaCogenx
+
+## Project Overview
+PharmaCogenx is an educational, rules-based pharmacogenomics simulator
+that demonstrates how genetic variation can influence medication response.
+
+## Objectives
+- Interpret structured, mock pharmacogenomic data.
+- Apply documented pharmacogenomic rules.
+- Explain rule-based results and their evidence sources.
+- Support uploading mock genetic reports.
+
+## Technology Stack
+- Python
+- CSV for initial rule and sample data storage
+- Automated testing with pytest
+
+## Scope and Limitations
+PharmaCogenx is an educational prototype, not a clinical decision-support
+system. It does not provide medical advice or determine treatment for real
+patients. Results are limited to the rules explicitly implemented.
+
+## Development Status
+Initial project setup.
