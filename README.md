@@ -1,7 +1,5 @@
 # PharmaCogenx
 
-# PharmaCogenx
-
 ## Project Overview
 PharmaCogenx is an educational, rules-based pharmacogenomics simulator
 that demonstrates how genetic variation can influence medication response.
