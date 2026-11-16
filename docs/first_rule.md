@@ -1,11 +1,11 @@
 # PharmaCogenx — First Rule Specification
 
 ## 1. Rule Identification
-- Rule ID: PGX-001
+- Rule ID: FDA.1.1
 - Gene: HLA-B
 - Medication: Abacavir
 - Source guideline: FDA Table of Pharmacogenetic Associations
-- Guideline publication/update date: Verify the current table date
+- Guideline publication/update date: 09/10/2026
 
 ## 2. Required Input
 - Required genetic information: HLA-B*57:01 test result
@@ -16,7 +16,7 @@
 - Condition to evaluate: Whether the HLA-B*57:01 allele is present
 - Expected result when the condition matches: For a positive result, report the FDA-listed increased hypersensitivity risk and avoidance recommendation
 - Behavior when the condition does not match: For a negative result, report that this specific positive-result rule was not triggered; do not imply that all hypersensitivity risk is absent
-- Behavior when required information is missing: Return an insufficient-data status
+- Behavior when required information is missing: Return an insufficient data status
 
 ## 4. Output
 - Interpretation: Display the test result and applicable rule outcome

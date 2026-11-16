@@ -11,7 +11,7 @@ def test_missing_rule():
 
 def test_rule_not_implemented():
     profile = {"gene": "TEST"}
-    rule = {"rule_id": "TEST-001"}
+    rule = {"rule_id": "TEST.0.0"}
     result = evaluate_rule(profile, rule)
 
     assert result["status"] == "not_implemented"
