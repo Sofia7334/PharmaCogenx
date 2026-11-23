@@ -51,7 +51,7 @@ def evaluate_rule(profile, rule):
             "message": "Genetic input values must be nonempty strings.",
         }
 
-    # Ensure the essential FDA association fields contain valid strings.
+    # Ensure essential FDA association fields contain valid strings.
     if not all(
         isinstance(rule[field], str) and rule[field].strip()
         for field in required_rule_fields
@@ -61,27 +61,7 @@ def evaluate_rule(profile, rule):
             "message": "FDA association fields must be nonempty strings.",
         }
 
-    # Compare gene names without being sensitive to letter case.
-    if profile["gene"].strip().upper() != rule["gene"].strip().upper():
-        return {
-            "status": "no_match",
-            "message": "The genetic profile does not match this association.",
-        }
-
-# Normalize the allele and subgroup for this specific HLA-B*57:01 prototype.
-allele = profile["allele"].strip().upper()
-subgroup = rule["affected_subgroups"].strip().upper()
-
-# Match the allele designation without requiring the gene prefix in the subgroup.
-allele_designation = allele.removeprefix("HLA-B")
-
-if allele_designation not in subgroup:
-    return {
-        "status": "no_match",
-        "message": "The allele does not match this FDA association.",
-    }
-
-    # Accept only the positive and negative result values supported by this prototype.
+    # Accept only positive or negative results in this prototype.
     result = profile["result"].strip().lower()
     if result not in {"positive", "negative"}:
         return {
@@ -89,7 +69,28 @@ if allele_designation not in subgroup:
             "message": "Result must be positive or negative.",
         }
 
-    # Return the FDA description when the affected subgroup is present.
+    # Check whether the profile's gene matches the FDA association.
+    if profile["gene"].strip().upper() != rule["gene"].strip().upper():
+        return {
+            "status": "no_match",
+            "message": "The genetic profile does not match this association.",
+        }
+
+    # Normalize the allele and subgroup for the HLA-B*57:01 prototype.
+    allele = profile["allele"].strip().upper()
+    subgroup = rule["affected_subgroups"].strip().upper()
+
+    # Remove the HLA-B prefix to compare with the FDA subgroup notation.
+    allele_designation = allele.removeprefix("HLA-B")
+
+    # Stop if the allele designation does not appear in the subgroup.
+    if allele_designation not in subgroup:
+        return {
+            "status": "no_match",
+            "message": "The allele does not match this FDA association.",
+        }
+
+    # Return the original FDA description for a positive result.
     if result == "positive":
         return {
             "status": "matched",
@@ -106,7 +107,7 @@ if allele_designation not in subgroup:
             ),
         }
 
-    # A negative result does not establish that a medication is safe or appropriate.
+    # Explain that a negative result does not establish medication safety.
     return {
         "status": "rule_not_triggered",
         "rule_id": rule["rule_id"],
